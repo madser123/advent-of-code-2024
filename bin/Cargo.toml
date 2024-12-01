@@ -1,0 +1,7 @@
+[package]
+name = "Aoc2024"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+historian_hysteria = { path = "../lib/historian_hysteria" }
