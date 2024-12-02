@@ -7,8 +7,13 @@ name = "Aoc2024"
 version = "0.1.0"
 dependencies = [
  "historian_hysteria",
+ "red_nosed_reports",
 ]
 
 [[package]]
 name = "historian_hysteria"
+version = "0.1.0"
+
+[[package]]
+name = "red_nosed_reports"
 version = "0.1.0"
