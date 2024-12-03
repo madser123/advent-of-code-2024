@@ -2,9 +2,12 @@ use historian_hysteria::CompareLocations;
 use mull_it_over::Calculations;
 use red_nosed_reports::Reports;
 
+use pretty_duration::pretty_duration;
 use std::str::FromStr;
 
 fn main() {
+    let total_time = std::time::Instant::now();
+
     let file = std::fs::read_to_string("inputs/day1.txt").unwrap();
 
     let cmp = CompareLocations::from_str(&file).unwrap();
@@ -28,4 +31,8 @@ fn main() {
 
     println!("Day3 Result: {}", calcs.sum());
     println!("Day3 Result 2: {}", calcs.sum_conditional());
+
+    let duration = pretty_duration(&total_time.elapsed(), None);
+
+    println!("Total time: {duration}");
 }

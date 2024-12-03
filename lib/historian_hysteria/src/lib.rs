@@ -13,11 +13,6 @@ pub struct CompareLocations {
 }
 
 impl CompareLocations {
-    pub fn print_lengths(&self) {
-        println!("Left: {}", self.left.len());
-        println!("Right: {}", self.right.len());
-    }
-
     pub fn compare(&self) -> usize {
         self.left.iter().enumerate().fold(0, |mut sum, (idx, num)| {
             sum += num.abs_diff(self.right[idx]);
@@ -97,14 +92,14 @@ mod tests {
 
     #[test]
     fn solution_1() {
-        let mut cmp = CompareLocations::from_str(EXAMPLE_1).unwrap();
+        let cmp = CompareLocations::from_str(EXAMPLE_1).unwrap();
 
         assert_eq!(cmp.compare(), 11)
     }
 
     #[test]
     fn solution_2() {
-        let mut cmp = CompareLocations::from_str(EXAMPLE_2).unwrap();
+        let cmp = CompareLocations::from_str(EXAMPLE_2).unwrap();
         assert_eq!(cmp.calculate_similarity(), 31)
     }
 }

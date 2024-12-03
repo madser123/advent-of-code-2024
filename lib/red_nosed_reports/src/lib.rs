@@ -49,10 +49,6 @@ impl Report {
                 }
             });
 
-            println!(
-                "({self:?}) max_diff: {max_diff}, biggest_diff: {biggest_diff}, illegals: {illegals:?}, increasing: {increasing:?}, decreasing: {decreasing:?}",
-            );
-
             if illegals.len() > 1 {
                 return false;
             }
@@ -116,7 +112,6 @@ impl Reports {
             .iter()
             .filter(|&a| {
                 let is_safe = a.is_safe(true);
-                println!("{a:?} = {is_safe}");
                 is_safe
             })
             .count()

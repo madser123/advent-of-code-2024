@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+# The only external dependency used throughout the project
+pretty-duration = "0.1.1"
+
 historian_hysteria = { path = "../lib/historian_hysteria" }
 red_nosed_reports = { path = "../lib/red_nosed_reports" }
 mull_it_over = { path = "../lib/mull_it_over" }

@@ -53,8 +53,6 @@ impl FromStr for Calculations {
 
         let calculations = mul_matches
             .filter_map(|(idx, _)| {
-                println!("Next do: {next_do} | Next don't: {next_do_not} | {idx}");
-
                 if next_do > next_do_not && next_do_not <= idx {
                     next_do_not = do_not_matches.next().unwrap_or(s.len());
                     enabled = false;
@@ -62,8 +60,6 @@ impl FromStr for Calculations {
                     next_do = do_matches.next().unwrap_or(s.len());
                     enabled = true;
                 }
-
-                println!("{idx} {enabled}");
 
                 let start = idx + 4;
                 let end = s[start..].find(')')? + start;
