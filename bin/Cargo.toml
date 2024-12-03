@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 historian_hysteria = { path = "../lib/historian_hysteria" }
 red_nosed_reports = { path = "../lib/red_nosed_reports" }
+mull_it_over = { path = "../lib/mull_it_over" }
