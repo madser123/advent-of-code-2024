@@ -1,5 +1,8 @@
 # Advent of Code 2024 Solutions
 
+The project can be run by putting your own inputs in an `inputs` folder.
+They should be ordered, so calling them `day1.txt`, `day2.txt`, etc.. Should suffice.
+
 ```
 [TIMING] 'Day 1' took: 264.62µs
 [TIMING] 'Day 2' took: 579.657µs
