@@ -10,3 +10,4 @@ pretty-duration = "0.1.1"
 historian_hysteria = { path = "../lib/historian_hysteria" }
 red_nosed_reports = { path = "../lib/red_nosed_reports" }
 mull_it_over = { path = "../lib/mull_it_over" }
+ceres_search = { path = "../lib/ceres_search" }
