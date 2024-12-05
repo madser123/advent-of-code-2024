@@ -49,9 +49,9 @@ fn day5(input: &str) {
 
 fn main() {
     println!("Advent of Code 2024 solutions");
+    let inputs = time!("Get inputs", { get_inputs!() });
+    println!("----");
     time!("All", {
-        let inputs = time!("Get inputs", { get_inputs!() });
-        println!("----");
         day!(1, day1, inputs);
         day!(2, day2, inputs);
         day!(3, day3, inputs);
