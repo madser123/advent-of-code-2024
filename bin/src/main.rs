@@ -9,7 +9,7 @@ use std::str::FromStr;
 fn main() {
     let total_time = std::time::Instant::now();
 
-    let file = std::fs::read_to_string("../../inputs/day1.txt").unwrap();
+    let file = std::fs::read_to_string("inputs/day1.txt").unwrap();
 
     let cmp = CompareLocations::from_str(&file).unwrap();
 
@@ -17,7 +17,7 @@ fn main() {
     println!("Day1 Result 2: {}", cmp.calculate_similarity());
 
     // Day 2
-    let file = std::fs::read_to_string("../../inputs/day2.txt").unwrap();
+    let file = std::fs::read_to_string("inputs/day2.txt").unwrap();
     let reports = Reports::from_str(&file).unwrap();
 
     println!("Day2 Result: {}", reports.get_amount_of_safe_reports());
@@ -27,14 +27,14 @@ fn main() {
     );
 
     // Day 3
-    let file = std::fs::read_to_string("../../inputs/day3.txt").unwrap();
+    let file = std::fs::read_to_string("inputs/day3.txt").unwrap();
     let calcs = Calculations::from_str(&file).unwrap();
 
     println!("Day3 Result: {}", calcs.sum());
     println!("Day3 Result 2: {}", calcs.sum_conditional());
 
     // Day 4
-    let file = std::fs::read_to_string("../../inputs/day4.txt").unwrap();
+    let file = std::fs::read_to_string("inputs/_day4.txt").unwrap();
     let word_search = WordSearch::new(&file);
 
     println!("Day4 Result: {}", word_search.whole_word_sum());
