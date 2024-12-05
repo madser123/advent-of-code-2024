@@ -1,54 +1,61 @@
+mod macros;
+
 use historian_hysteria::CompareLocations;
 use mull_it_over::Calculations;
 use print_queue::PrintQueue;
 use red_nosed_reports::Reports;
 
 use ceres_search::WordSearch;
-use pretty_duration::pretty_duration;
 use std::str::FromStr;
 
-fn main() {
-    let total_time = std::time::Instant::now();
+fn day1(input: &str) {
+    let cmp = CompareLocations::from_str(input).expect("Could not parse day1");
+    println!("Total distance: {}", cmp.total_distance());
+    println!("Similarity score: {}", cmp.similarity_score());
+}
 
-    let file = std::fs::read_to_string("inputs/day1.txt").unwrap();
-
-    let cmp = CompareLocations::from_str(&file).unwrap();
-
-    println!("Day1 Result: {}", cmp.compare());
-    println!("Day1 Result 2: {}", cmp.calculate_similarity());
-
-    // Day 2
-    let file = std::fs::read_to_string("inputs/day2.txt").unwrap();
-    let reports = Reports::from_str(&file).unwrap();
-
-    println!("Day2 Result: {}", reports.get_amount_of_safe_reports());
+fn day2(input: &str) {
+    let reports = Reports::from_str(input).expect("Could not parse input");
     println!(
-        "Day2 Result 2: {}",
-        reports.get_amount_of_dampened_safe_reports()
+        "Safe reports: {}",
+        reports.get_amount_of_safe_reports(false)
     );
+    println!(
+        "Safe reports (dampened): {}",
+        reports.get_amount_of_safe_reports(true)
+    );
+}
 
-    // Day 3
-    let file = std::fs::read_to_string("inputs/day3.txt").unwrap();
-    let calcs = Calculations::from_str(&file).unwrap();
+fn day3(input: &str) {
+    let calculations = Calculations::from_str(input).expect("Could not parse input");
+    println!("Sum: {}", calculations.sum());
+    println!("Sum (with conditions): {}", calculations.sum_conditional());
+}
 
-    println!("Day3 Result: {}", calcs.sum());
-    println!("Day3 Result 2: {}", calcs.sum_conditional());
+fn day4(input: &str) {
+    let word_search = WordSearch::from_str(input).expect("Could not parse input");
+    println!("XMAS : {}", word_search.find_xmas());
+    println!("X-MAS: {}", word_search.find_x_mas());
+}
 
-    // Day 4
-    let file = std::fs::read_to_string("inputs/day4.txt").unwrap();
-    let word_search = WordSearch::new(&file);
+fn day5(input: &str) {
+    let print_queue = PrintQueue::from_str(input).expect("Could not parse input");
+    println!("Correct updates sum: {}", print_queue.correct_updates_sum());
+    println!(
+        "Incorrect updates sum: {}",
+        print_queue.incorrect_updates_sum()
+    );
+}
 
-    println!("Day4 Result: {}", word_search.whole_word_sum());
-    println!("Day4 Result 2: {}", word_search.xmas_sum());
-
-    // Day 4
-    let file = std::fs::read_to_string("inputs/day5.txt").unwrap();
-    let print_queue = PrintQueue::from_str(&file).unwrap();
-
-    println!("Day5 Result: {}", print_queue.correct_updates_sum());
-    println!("Day5 Result 2: {}", print_queue.incorrect_updates_sum());
-
-    let duration = pretty_duration(&total_time.elapsed(), None);
-
-    println!("Total time: {duration}");
+fn main() {
+    println!("Advent of Code 2024 solutions");
+    time!("All", {
+        let inputs = time!("Get inputs", { get_inputs!() });
+        println!("----");
+        day!(1, day1, inputs);
+        day!(2, day2, inputs);
+        day!(3, day3, inputs);
+        day!(4, day4, inputs);
+        day!(5, day5, inputs);
+    });
 }

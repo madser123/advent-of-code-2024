@@ -103,18 +103,8 @@ impl FromStr for Report {
 pub struct Reports(Vec<Report>);
 
 impl Reports {
-    pub fn get_amount_of_safe_reports(&self) -> usize {
-        self.0.iter().filter(|&a| a.is_safe(false)).count()
-    }
-
-    pub fn get_amount_of_dampened_safe_reports(&self) -> usize {
-        self.0
-            .iter()
-            .filter(|&a| {
-                let is_safe = a.is_safe(true);
-                is_safe
-            })
-            .count()
+    pub fn get_amount_of_safe_reports(&self, dampen: bool) -> usize {
+        self.0.iter().filter(|&a| a.is_safe(dampen)).count()
     }
 }
 
@@ -146,14 +136,12 @@ mod tests {
     #[test]
     pub fn solution_1() {
         let reports = Reports::from_str(EXAMPLE).expect("failed to parse reports");
-
-        assert_eq!(reports.get_amount_of_safe_reports(), 2);
+        assert_eq!(reports.get_amount_of_safe_reports(false), 2);
     }
 
     #[test]
     pub fn solution_2() {
         let reports = Reports::from_str(EXAMPLE).expect("failed to parse reports");
-
-        assert_eq!(reports.get_amount_of_dampened_safe_reports(), 4);
+        assert_eq!(reports.get_amount_of_safe_reports(true), 4);
     }
 }

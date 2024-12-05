@@ -22,7 +22,7 @@ const DIAGONALS: [(isize, isize); 4] = [
 pub struct Coordinate(pub usize, pub usize);
 
 impl Coordinate {
-    pub fn transform(&self, x: isize, y: isize) -> Option<Self> {
+    fn transform(&self, x: isize, y: isize) -> Option<Self> {
         let new_x = (self.0 as isize).checked_add(x)? as usize;
         let new_y = (self.1 as isize).checked_add(y)? as usize;
 
@@ -30,10 +30,10 @@ impl Coordinate {
     }
 }
 
-pub struct LetterMatrix(Vec<String>);
+pub struct WordSearch(Vec<String>);
 
-impl LetterMatrix {
-    pub fn find_coordinates_for(&self, letter: char) -> Vec<Coordinate> {
+impl WordSearch {
+    fn find_coordinates_for(&self, letter: char) -> Vec<Coordinate> {
         self.0
             .iter()
             .enumerate()
@@ -46,38 +46,12 @@ impl LetterMatrix {
             })
     }
 
-    pub fn get_coord(&self, coord: Coordinate) -> Option<char> {
+    fn get_coord(&self, coord: Coordinate) -> Option<char> {
         self.0.get(coord.0).and_then(|row| row.chars().nth(coord.1))
     }
-}
 
-impl FromStr for LetterMatrix {
-    type Err = ();
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let matrix = s
-            .lines()
-            .filter(|l| !l.is_empty())
-            .map(|l| l.to_string())
-            .collect();
-
-        Ok(Self(matrix))
-    }
-}
-
-pub struct WordSearch {
-    matrix: LetterMatrix,
-}
-
-impl WordSearch {
-    pub fn new(words: &str) -> Self {
-        let matrix = LetterMatrix::from_str(words).expect("Failed to parse matrix");
-
-        Self { matrix }
-    }
-
-    pub fn whole_word_sum(&self) -> usize {
-        let start_coordinates = self.matrix.find_coordinates_for('X');
+    pub fn find_xmas(&self) -> usize {
+        let start_coordinates = self.find_coordinates_for('X');
 
         let mut result = 0;
 
@@ -92,7 +66,7 @@ impl WordSearch {
                 let mut current_char = 'M';
                 let mut next_char_idx = 0;
 
-                while let Some(found) = self.matrix.get_coord(current_coord) {
+                while let Some(found) = self.get_coord(current_coord) {
                     if found == current_char {
                         let Some(next) = remaining.chars().nth(next_char_idx) else {
                             result += 1;
@@ -116,8 +90,8 @@ impl WordSearch {
         result
     }
 
-    pub fn xmas_sum(&self) -> usize {
-        let start_coordinates = self.matrix.find_coordinates_for('A');
+    pub fn find_x_mas(&self) -> usize {
+        let start_coordinates = self.find_coordinates_for('A');
         let allowed_patterns = ["MSSM", "SMMS", "MSMS", "SMSM"]; // Allowed patterns when checking diagonals in order
 
         let mut result = 0;
@@ -129,7 +103,7 @@ impl WordSearch {
                     break;
                 };
 
-                let Some(found) = self.matrix.get_coord(current_coord) else {
+                let Some(found) = self.get_coord(current_coord) else {
                     break;
                 };
 
@@ -145,9 +119,24 @@ impl WordSearch {
     }
 }
 
+impl FromStr for WordSearch {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let matrix = s
+            .lines()
+            .filter(|l| !l.is_empty())
+            .map(|l| l.to_string())
+            .collect();
+
+        Ok(Self(matrix))
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use crate::WordSearch;
+    use std::str::FromStr;
 
     const EXAMPLE: &str = r#"
         MMMSXXMASM
@@ -163,15 +152,13 @@ mod tests {
 
     #[test]
     fn solution_1() {
-        let word_search = WordSearch::new(EXAMPLE);
-
-        assert_eq!(word_search.whole_word_sum(), 18);
+        let word_search = WordSearch::from_str(EXAMPLE).expect("Failed to parse example");
+        assert_eq!(word_search.find_xmas(), 18);
     }
 
     #[test]
     fn solution_2() {
-        let word_search = WordSearch::new(EXAMPLE);
-
-        assert_eq!(word_search.xmas_sum(), 9);
+        let word_search = WordSearch::from_str(EXAMPLE).expect("Failed to parse example");
+        assert_eq!(word_search.find_x_mas(), 9);
     }
 }

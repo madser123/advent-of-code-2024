@@ -13,14 +13,14 @@ pub struct CompareLocations {
 }
 
 impl CompareLocations {
-    pub fn compare(&self) -> usize {
+    pub fn total_distance(&self) -> usize {
         self.left.iter().enumerate().fold(0, |mut sum, (idx, num)| {
             sum += num.abs_diff(self.right[idx]);
             sum
         })
     }
 
-    pub fn calculate_similarity(&self) -> usize {
+    pub fn similarity_score(&self) -> usize {
         let mut right_hits = HashMap::new();
         self.right.iter().for_each(|num| {
             right_hits.entry(num).and_modify(|e| *e += 1).or_insert(1);
@@ -94,12 +94,12 @@ mod tests {
     fn solution_1() {
         let cmp = CompareLocations::from_str(EXAMPLE_1).unwrap();
 
-        assert_eq!(cmp.compare(), 11)
+        assert_eq!(cmp.total_distance(), 11)
     }
 
     #[test]
     fn solution_2() {
         let cmp = CompareLocations::from_str(EXAMPLE_2).unwrap();
-        assert_eq!(cmp.calculate_similarity(), 31)
+        assert_eq!(cmp.similarity_score(), 31)
     }
 }
