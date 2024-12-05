@@ -1,5 +1,6 @@
 use historian_hysteria::CompareLocations;
 use mull_it_over::Calculations;
+use print_queue::PrintQueue;
 use red_nosed_reports::Reports;
 
 use ceres_search::WordSearch;
@@ -34,11 +35,18 @@ fn main() {
     println!("Day3 Result 2: {}", calcs.sum_conditional());
 
     // Day 4
-    let file = std::fs::read_to_string("inputs/_day4.txt").unwrap();
+    let file = std::fs::read_to_string("inputs/day4.txt").unwrap();
     let word_search = WordSearch::new(&file);
 
     println!("Day4 Result: {}", word_search.whole_word_sum());
     println!("Day4 Result 2: {}", word_search.xmas_sum());
+
+    // Day 4
+    let file = std::fs::read_to_string("inputs/day5.txt").unwrap();
+    let print_queue = PrintQueue::from_str(&file).unwrap();
+
+    println!("Day5 Result: {}", print_queue.correct_updates_sum());
+    println!("Day5 Result 2: {}", print_queue.incorrect_updates_sum());
 
     let duration = pretty_duration(&total_time.elapsed(), None);
 
