@@ -9,3 +9,4 @@ red_nosed_reports = { path = "../lib/red_nosed_reports" }
 mull_it_over = { path = "../lib/mull_it_over" }
 ceres_search = { path = "../lib/ceres_search" }
 print_queue = { path = "../lib/print_queue" }
+guard_gallivant = { path = "../lib/guard_gallivant" }

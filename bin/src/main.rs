@@ -6,6 +6,7 @@ use print_queue::PrintQueue;
 use red_nosed_reports::Reports;
 
 use ceres_search::WordSearch;
+use guard_gallivant::Lab;
 use std::str::FromStr;
 
 fn day1(input: &str) {
@@ -47,6 +48,12 @@ fn day5(input: &str) {
     );
 }
 
+fn day6(input: &str) {
+    let lab = Lab::from_str(input).expect("Could not parse input");
+    println!("Tiles visited: {}", lab.find_guard_route_visits());
+    println!("Looping routes: {}", lab.find_route_loops());
+}
+
 fn main() {
     println!("Advent of Code 2024 solutions");
     let inputs = time!("Get inputs", { get_inputs!() });
@@ -57,5 +64,6 @@ fn main() {
         day!(3, day3, inputs);
         day!(4, day4, inputs);
         day!(5, day5, inputs);
+        day!(6, day6, inputs);
     });
 }

@@ -7,6 +7,7 @@ name = "Aoc2024"
 version = "0.1.0"
 dependencies = [
  "ceres_search",
+ "guard_gallivant",
  "historian_hysteria",
  "mull_it_over",
  "print_queue",
@@ -15,6 +16,10 @@ dependencies = [
 
 [[package]]
 name = "ceres_search"
+version = "0.1.0"
+
+[[package]]
+name = "guard_gallivant"
 version = "0.1.0"
 
 [[package]]
